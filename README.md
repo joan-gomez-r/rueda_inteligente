@@ -239,6 +239,7 @@ composer update
 ./yii migrate --migrationPath=@mdm/admin/migrations
 
 URLs:
+
 http://localhost/path/to/index.php?r=admin
 
 http://localhost/path/to/index.php?r=admin/route
