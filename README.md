@@ -242,16 +242,16 @@ composer update
 
 URLs:
 
-http://localhost/path/to/index.php?r=admin
+http://localhost/rueda_inteligente/web/index.php?r=admin
 
-http://localhost/path/to/index.php?r=admin/route
+http://localhost/rueda_inteligente/web/index.php?r=admin/route
 
-http://localhost/path/to/index.php?r=admin/permission
+http://localhost/rueda_inteligente/web/index.php?r=admin/permission
 
-http://localhost/path/to/index.php?r=admin/menu
+http://localhost/rueda_inteligente/web/index.php?r=admin/menu
 
-http://localhost/path/to/index.php?r=admin/role
+http://localhost/rueda_inteligente/web/index.php?r=admin/role
 
-http://localhost/path/to/index.php?r=admin/assignment
+http://localhost/rueda_inteligente/web/index.php?r=admin/assignment
 
-http://localhost/path/to/index.php?r=admin/user
+http://localhost/rueda_inteligente/web/index.php?r=admin/user
