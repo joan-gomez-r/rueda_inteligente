@@ -235,7 +235,9 @@ You can see code coverage output under the `tests/_output` directory.
 
 
 composer update     
+
 ./yii migrate --migrationPath=@yii/rbac/migrations
+
 ./yii migrate --migrationPath=@mdm/admin/migrations
 
 URLs:
