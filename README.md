@@ -237,3 +237,12 @@ You can see code coverage output under the `tests/_output` directory.
 composer update     
 ./yii migrate --migrationPath=@yii/rbac/migrations
 ./yii migrate --migrationPath=@mdm/admin/migrations
+
+URLs:
+http://localhost/path/to/index.php?r=admin
+http://localhost/path/to/index.php?r=admin/route
+http://localhost/path/to/index.php?r=admin/permission
+http://localhost/path/to/index.php?r=admin/menu
+http://localhost/path/to/index.php?r=admin/role
+http://localhost/path/to/index.php?r=admin/assignment
+http://localhost/path/to/index.php?r=admin/user
