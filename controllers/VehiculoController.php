@@ -2,12 +2,14 @@
 
 namespace app\controllers;
 
+use app\models\Resenia;
 use app\models\Vehiculo;
 use app\models\VehiculoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use Yii;
 
 /**
  * VehiculoController implements the CRUD actions for Vehiculo model.
@@ -70,7 +72,7 @@ class VehiculoController extends Controller
     {
         $model = new Vehiculo();
 
-        $this ->subirImagen($model);
+        $this->subirImagen($model);
 
         return $this->render('create', [
             'model' => $model,
@@ -92,7 +94,7 @@ class VehiculoController extends Controller
     {
         $model = $this->findModel($id);
 
-        $this ->subirImagen($model);
+        $this->subirImagen($model);
 
         return $this->render('update', [
             'model' => $model,
@@ -113,7 +115,7 @@ class VehiculoController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if(file_exists($model->imagen)){
+        if (file_exists($model->imagen)) {
             unlink($model->imagen);
         }
         $model->delete();
@@ -136,22 +138,23 @@ class VehiculoController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    protected function subirImagen(Vehiculo $model){
+    protected function subirImagen(Vehiculo $model)
+    {
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $model->archivo=UploadedFile::getInstance($model,'archivo');
-                if($model->validate()){
-                    if($model->archivo){
-                        if(file_exists($model->imagen)){
+                $model->archivo = UploadedFile::getInstance($model, 'archivo');
+                if ($model->validate()) {
+                    if ($model->archivo) {
+                        if (file_exists($model->imagen)) {
                             unlink($model->imagen);
                         }
-                        $ruta='uploads/'.time().'_'.$model->archivo->baseName.'.'.$model->archivo->extension;
-                        if($model->archivo->saveAs($ruta)){
-                            $model->imagen=$ruta;
+                        $ruta = 'uploads/' . time() . '_' . $model->archivo->baseName . '.' . $model->archivo->extension;
+                        if ($model->archivo->saveAs($ruta)) {
+                            $model->imagen = $ruta;
                         }
                     }
                 }
-                if($model->save(false)){
+                if ($model->save(false)) {
                     return $this->redirect(['index']);
                 }
             }
@@ -159,4 +162,39 @@ class VehiculoController extends Controller
             $model->loadDefaultValues();
         }
     }
+    public function actionBuscarVehiculos()
+    {
+        $lista_vehiculos = Vehiculo::find()->all();
+        $vehiculos = new VehiculoSearch();
+        $resultado = false;
+
+        if ($this->request->isPost && !empty($this->request->bodyParams)) {
+            // Procesar los datos del formulario
+            $dataProvider = $vehiculos->search($this->request->bodyParams);
+            $resultado = true;
+        } else {
+            // Mostrar todos los vehículos por defecto
+            $dataProvider = $vehiculos->search([]);
+        }
+
+        return $this->render('carro_ideal', [
+            'lista_vehiculos' => $lista_vehiculos,
+            'dataProvider' => $dataProvider,
+            'vehiculos' => $vehiculos,
+            'resultado' => $resultado
+        ]);
+    }
+
+
+
+    public function actionGetReviews($id)
+    {
+        $resenas = Resenia::find()->where(['vehiculo_id' => $id])->all();
+        if ($resenas !== null) {
+            return json_encode(['success' => true, 'reseñas' => $resenas]);
+        } else {
+            return json_encode(['success' => false, 'error' => 'Vehículo no encontrado']);
+        }
+    }
+
 }
