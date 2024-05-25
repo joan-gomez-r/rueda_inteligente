@@ -33,8 +33,8 @@ class LoginFormCest
     {
         $I->submitForm('#login-form', []);
         $I->expectTo('see validations errors');
-        $I->see('Username cannot be blank.');
-        $I->see('Password cannot be blank.');
+        $I->see('El usuario no puede estar en blanco.');
+        $I->see('La contraseña no puede estar en blanco.');
     }
 
     public function loginWithWrongCredentials(\FunctionalTester $I)
@@ -54,6 +54,6 @@ class LoginFormCest
             'LoginForm[password]' => 'admin',
         ]);
         $I->see('Logout (admin)');
-        $I->dontSeeElement('form#login-form');              
+        $I->dontSeeElement('form#login-form');
     }
 }
