@@ -21,7 +21,9 @@
         "yiisoft/yii2-bootstrap5": "^2.0",
         "kartik-v/yii2-checkbox-x": "dev-master",
         "kartik-v/yii2-widget-rating": "^1.0",
-        "mdmsoft/yii2-admin": "2.x-dev"
+        "mdmsoft/yii2-admin": "*",
+        "kartik-v/yii2-widget-sidenav": "dev-master",
+        "fortawesome/font-awesome": "^6.5"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

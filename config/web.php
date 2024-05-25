@@ -7,9 +7,10 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'es-ES',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'modules' => [
         'admin' => [
@@ -59,7 +60,21 @@ $config = [
         'user' => [
             'identityClass' => 'mdm\admin\models\User',
             'loginUrl' => ['admin/user/login'],
-        ]
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                        // otros archivos de traducción
+                    ],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
     'as access' => [
